@@ -20,11 +20,11 @@ npm install queue
 
 client.on('ready',  () => {
 
-client.user.setGame(`1play`,'https://www.twitch.tv/hix')
+client.user.setGame(`2play`,'https://www.twitch.tv/hix')
 client.user.setStatus("online");
 });
 
-const prefix = "1"
+const prefix = "2"
 client.on('message', async msg => { // eslint-disable-line
 	if (msg.author.bot) return undefined;
 
@@ -72,10 +72,10 @@ client.on('message', async msg => { // eslint-disable-line
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`**الرجآء من حضرتك إخالمقطع** :
+			        .setDescription(`**الرجآء من حضرتك اختيار مقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("best")
+					.setFooter("GB Music")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					// eslint-disable-next-line max-depth
@@ -216,34 +216,9 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 
-const adminprefix = "=vip";
-const devs = ['274923685985386496'];
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
-    
-if (message.content.startsWith(adminprefix + 'setgame')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else 
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else     
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
-
-});
 
 client.on("message", message => {
- if (message.content === `1help`) {
+ if (message.content === `2help`) {
   const embed = new Discord.RichEmbed() 
       .setColor("#000000")
       .setDescription(`
@@ -262,4 +237,4 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    }
    }); 
    
-	client.login("NDUxMzM0MTY5NzY3NzA2NjI2.DfS6MA.8RUc3EV40AKe516TfDgrsfIW2M4");
+	client.login(process.env.BOT_TOKEN)
